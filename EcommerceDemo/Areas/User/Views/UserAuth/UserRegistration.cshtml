@@ -1,0 +1,247 @@
+﻿@model EcommerceDemo.Areas.User.Models.VMRegisterUser
+
+@{
+    ViewData["Title"] = "User Registration";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #07212e;
+        background-size: cover;
+        background-position: center;
+        font-family: 'Segoe UI', sans-serif;
+        min-height: 100vh;
+    }
+
+    h3 {
+        color: #fff;
+    }
+
+    /* form { */
+    /*     background-color: rgba(255, 255, 255, 0.95); */
+    /*     max-width: 100%; */
+    /* } */
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #ff9800;
+        box-shadow: 0 0 5px rgba(255, 152, 0, 0.8);
+    }
+
+    label {
+        color: #ff9800;
+        font-weight: 600;
+    }
+
+    .btn-success {
+        background-color: #ff9800;
+        border-color: #ff9800;
+    }
+
+        .btn-success:hover {
+            background-color: #e68a00;
+            border-color: #e68a00;
+        }
+
+    .btn-outline-secondary {
+        color: #ff9800;
+        border-color: #ff9800;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #ff9800;
+            color: #fff;
+        }
+
+    .alert-danger {
+        /* background-color: rgba(255, 0, 0, 0.1); */
+        /* color: red; */
+        /* border: 1px solid red; */
+    }
+
+    .password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #ff9800;
+    }
+
+    .form-floating {
+        position: relative;
+    }
+
+    .heding {
+        color: #ff9800;
+    }
+
+    .right-image {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        max-width: 600px;
+        max-height: 580px;
+        border-radius: 1rem;
+    }
+
+    .customrow {
+        background-color: rgba(255, 255, 255, 0.95); 
+        border-radius: 4.25rem !important; 
+        overflow: hidden; 
+        min-height: 100%;
+    }
+
+   
+
+    }
+</style>
+
+<div class="maincontainer container mt-5 mb-5">
+    <div class="row align-items-stretch customrow">
+        <!-- Left: Registration Form -->
+        <div class="col-lg-6 d-flex justify-content-center">
+            <form asp-action="UserRegistration" enctype="multipart/form-data" method="post"
+                  class=" p-4 w-100">
+
+                <h3 class="heding text-center fw-bold mb-4">Create Your Account</h3>
+
+                <div asp-validation-summary="ModelOnly" class="alert text-danger"></div>
+
+                <div class="row g-4">
+                    <!-- Column 1 -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input asp-for="UserName" class="form-control" placeholder="User Name" />
+                            <label asp-for="UserName"></label>
+                            <span asp-validation-for="UserName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="UserEmail" class="form-control" placeholder="Email" />
+                            <label asp-for="UserEmail"></label>
+                            <span asp-validation-for="UserEmail" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="Password" type="password" class="form-control" id="password" placeholder="Password" />
+                            <label asp-for="Password"></label>
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                            <span class="password-toggle" onclick="togglePassword('password', this)">👁️</span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" />
+                            <label asp-for="ConfirmPassword"></label>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                            <span class="password-toggle" onclick="togglePassword('confirmPassword', this)">👁️</span>
+                        </div>
+
+                        <div class="mt-3">
+                            <label asp-for="Gender" class="form-label"></label>
+                            <select asp-for="Gender" class="form-select">
+                                <option value="">-- Select Gender --</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mt-3">
+                            <label asp-for="DateOfBirth" class="form-label"></label>
+                            <input asp-for="DateOfBirth" type="date"    class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+                            <label asp-for="PhoneNumber"></label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="Address" class="form-control" placeholder="Address" />
+                            <label asp-for="Address"></label>
+                            <span asp-validation-for="Address" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="City" class="form-control" placeholder="City" />
+                            <label asp-for="City"></label>
+                            <span asp-validation-for="City" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="State" class="form-control" placeholder="State" />
+                            <label asp-for="State"></label>
+                            <span asp-validation-for="State" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="PostalCode" class="form-control" placeholder="Postal Code" />
+                            <label asp-for="PostalCode"></label>
+                            <span asp-validation-for="PostalCode" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mt-3">
+                            <label asp-for="ProfileImageFile" class="form-label">Profile Image</label>
+                            <input asp-for="ProfileImageFile" type="file" class="form-control" />
+                            <span asp-validation-for="ProfileImageFile" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <input asp-for="RoleId" type="hidden" value="7" />
+
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <button type="submit" class="btn btn-success px-4 py-2 fw-semibold shadow-sm w-50">
+                        Register
+                    </button>
+                    <a asp-action="Login" class="btn btn-outline-secondary px-4 py-2 fw-semibold shadow-sm w-50 ms-3">
+                        Cancel
+                    </a>
+                </div>
+
+                <div class="text-center mt-3">
+                    <span>Already have an account?</span>
+                    <a asp-action="Login" class="text-decoration-none fw-semibold" style="color: #ff9800;">
+                        Login here
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right: Image -->
+        <div class="col-lg-6 d-none d-lg-block p-5">
+            <img src="@Url.Content("~/Images/Registration-rightside-cart.png")" alt="Registration Image" class="right-image">
+            
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function togglePassword(inputId, toggleIcon) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+                toggleIcon.textContent = "🙈";
+            } else {
+                input.type = "password";
+                toggleIcon.textContent = "👁️";
+            }
+        }
+    </script>
+}
